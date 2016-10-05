@@ -25,5 +25,5 @@ function countdown() {
   document.querySelector("#countdown").innerHTML = day + hour + minute + second;
 
   // 1000ミリ秒後にキューを再登録
-  setTimeout("countdown()", 1000)
+  setTimeout(countdown, 1000);
 }
