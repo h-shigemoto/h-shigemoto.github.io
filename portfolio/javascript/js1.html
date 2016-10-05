@@ -54,7 +54,7 @@
 
       <!-- Change Opacity -->
       <div id="changeOpacityDiv" class="card">
-        <h4 class="card-header">透明度を変更する</h4>
+        <h4 class="card-header">要素の透明度を変更する</h4>
         <div class="card-block">
           <table>
             <tr>
@@ -68,12 +68,30 @@
           </table>
         </div>
       </div>
+
+      <br>
+
+      <!-- rotate -->
+      <div id="targetRotateDiv" class="card">
+        <h4 class="card-header">要素を回転させる</h4>
+        <div class="card-block">
+          <table>
+            <tr>
+              <td style="width: 15rem; height: 7rem"><div id="rotateDiv" style="background-color: darkred;height: 5rem;width: 5rem;align: center;margin-left: 3rem"></td>
+              <td>
+                <button class="btn btn-info" onclick="changeRotateDirection()">回転方向切替</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
 
     <!-- portfolio javascript -->
     <script type="text/javascript" src="./1/countdown.js"></script>
     <script type="text/javascript" src="./1/mouse_point.js"></script>
     <script type="text/javascript" src="./1/change_opacity.js"></script>
+    <script type="text/javascript" src="./1/rotate.js"></script>
     <!-- onload setting -->
     <script type="text/javascript">
       // JS1 onload
@@ -81,7 +99,11 @@
         // countdown
         countdown();
         // mouse point
-        document.addEventListener("mousemove", displayMousePoint) ;
+        document.addEventListener("mousemove", displayMousePoint);
+        // rotate
+        rotateDirection = 0;
+        rotateRange = 0;
+        window.setInterval(rotate, 200);
       }
     </script>
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
