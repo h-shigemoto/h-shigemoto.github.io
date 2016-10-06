@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>KOYUPI</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
   </head>
   <body style="background-color:#F0FFFF" onload="js1_onload()">
     <nav class="navbar navbar-dark bg-inverse">
@@ -58,7 +58,9 @@
         <div class="card-block">
           <table>
             <tr>
-              <td style="width: 15rem"><div id="opacityDiv" style="background-color: violet;height: 7rem;width: 10rem;align: center;margin-left: 1rem"></td>
+              <td style="width: 15rem">
+                <div id="opacityDiv" style="background-color: violet;height: 7rem;width: 10rem;align: center;margin-left: 1rem">
+              </td>
               <td>
                 <button class="btn btn-info" onclick="changeOpacity(0.0, true)">透明度を徐々に上げる</button>
                 <br><br>
@@ -77,9 +79,33 @@
         <div class="card-block">
           <table>
             <tr>
-              <td style="width: 15rem; height: 7rem"><div id="rotateDiv" style="background-color: darkred;height: 5rem;width: 5rem;align: center;margin-left: 3rem"></td>
+              <td style="width: 15rem;height: 7rem">
+                <div id="rotateDiv" style="background-color: darkred;height: 5rem;width: 5rem;align: center;margin-left: 3rem">
+              </td>
               <td>
                 <button class="btn btn-info" onclick="changeRotateDirection()">回転方向切替</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <br>
+
+      <!-- class -->
+      <div id="classDiv" class="card">
+        <h4 class="card-header">クラス化の練習（入力値をラベル表示）</h4>
+        <div class="card-block">
+          <table>
+            <tr>
+              <td style="width: 20rem;height: 7rem;padding-right: 2rem">
+                <input type="text" id="class_name" class="form-control">さんは、&nbsp;<input type="number" id="class_age" class="form-control">歳です。
+              </td>
+              <td>
+                <button class="btn btn-info" onclick="displayClassLabel()">結果を表示</button>
+              </td>
+              <td style="padding-left: 2rem">
+                <span id="class_result"></span>
               </td>
             </tr>
           </table>
@@ -92,6 +118,7 @@
     <script type="text/javascript" src="./1/mouse_point.js"></script>
     <script type="text/javascript" src="./1/change_opacity.js"></script>
     <script type="text/javascript" src="./1/rotate.js"></script>
+    <script type="text/javascript" src="./1/class.js"></script>
     <!-- onload setting -->
     <script type="text/javascript">
       // JS1 onload
@@ -109,6 +136,6 @@
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
   </body>
 </html>
