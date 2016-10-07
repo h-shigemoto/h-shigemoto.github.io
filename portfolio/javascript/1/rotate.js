@@ -7,23 +7,28 @@ function rotate() {
   }
 
   // 角度計算する。
-  if (rotateDirection === 0) {
-    rotateRange += 5;
-  } else {
-    rotateRange -= 5;
-  }
+  rotateRange += 5;
   rotateRange %= 360;
 
+  // 回転軸を決める（標準はrotate（Z軸回転）にしておく）。
   var rangeStr = "rotate(" + rotateRange + "deg)";
-  document.querySelector("#rotateDiv").style.transform = rangeStr;
+  if (rotateDirection === 1) {
+    rangeStr = "rotateX(" + rotateRange + "deg)";
+  } else if (rotateDirection === 2) {
+    rangeStr = "rotateY(" + rotateRange + "deg)";
+  }
+
+  document.querySelector("#rotateImg").style.transform = rangeStr;
 }
 
-// 回転方向を変更する。
+// 回転軸を変更する。
 function changeRotateDirection() {
 
-  // 回転方向を設定する。
+  // 回転軸を設定する（0：Z軸、1：X軸、2：Y軸）。
   if (rotateDirection === 0) {
     rotateDirection = 1;
+  } else if (rotateDirection === 1) {
+    rotateDirection = 2;
   } else {
     rotateDirection = 0;
   }
