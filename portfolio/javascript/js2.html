@@ -5,7 +5,7 @@
     <title>KOYUPI</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
   </head>
-  <body style="background-color:#F0FFFF">
+  <body style="background-color:#F0FFFF" onload="js2_onload()">
     <nav class="navbar navbar-dark bg-inverse">
 
       <!-- Brand -->
@@ -29,44 +29,28 @@
     </nav>
 
     <div class="container" style="margin: 2rem">
-      ※各リンク先の内容については、
-      <button class="navbar-toggler bg-faded" type="button" data-toggle="collapse">
-        =
-      </button>
-      ボタンを押してメニューを展開すると確認できます。<br>
-      1つのリンク先につき、5項目程度実装してみる予定です。
+      <a href="menu.html">メニューに戻る</a>
       <br><br>
-      <nav class="navbar navbar-dark bg-inverse">
-        <button class="navbar-toggler bg-faded" type="button" data-toggle="collapse" data-target="#js1">
-          =
-        </button>
-        <a class="nav-link" style="margin-left: 1rem" href="js1.html">Javascript&nbsp;1</a>
-      </nav>
-      <div class="collapse" id="js1">
-        <ul class="list-group">
-          <li class="list-group-item">カウントダウン</li>
-          <li class="list-group-item">マウスの座標表示</li>
-          <li class="list-group-item">要素の透明度を変更する</li>
-          <li class="list-group-item">要素を回転させる</li>
-          <li class="list-group-item">クラス化の練習（入力値をラベル表示）</li>
-        </ul>
-      </div>
 
-      <br>
-
-      <nav class="navbar navbar-dark bg-inverse">
-        <button class="navbar-toggler bg-faded" type="button" data-toggle="collapse" data-target="#js2">
-          =
-        </button>
-        <a class="nav-link" style="margin-left: 1rem" href="js2.html">Javascript&nbsp;2</a>
-      </nav>
-      <div class="collapse" id="js2">
-        <ul class="list-group">
-          <li class="list-group-item">ローディング画像を別窓で表示する</li>
-        </ul>
+      <!-- # display loading. -->
+      <div id="loadingDiv" class="card">
+        <h4 class="card-header">ローディング画像を別窓で表示する</h4>
+        <div id="loadingCardDiv" class="card-block">
+          <button class="btn btn-info" onclick="displayLoading()">ローディング画像を別窓表示</button>
+        </div>
       </div>
     </div>
 
+    <!-- portfolio javascript -->
+    <script type="text/javascript" src="./2/loading.js"></script>
+    <!-- onload setting -->
+    <script type="text/javascript">
+      // JS2 onload
+      function js2_onload() {
+        // loading image window.
+        loadingWindow = null;
+      }
+    </script>
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>

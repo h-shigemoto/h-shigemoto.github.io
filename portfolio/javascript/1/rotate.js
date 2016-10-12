@@ -2,7 +2,7 @@
 function rotate() {
 
   // 回転方向が設定されていない場合、初期設定しておく。
-  if (rotateDirection === undefined) {
+  if (rotateDirection == null) {
     rotateDirection = 0;
   }
 
