@@ -35,20 +35,35 @@
       <!-- # display loading. -->
       <div id="loadingDiv" class="card">
         <h4 class="card-header">ローディング画像を別窓で表示する</h4>
-        <div id="loadingCardDiv" class="card-block">
+        <div class="card-block">
           <button class="btn btn-info" onclick="displayLoading()">ローディング画像を別窓表示</button>
+        </div>
+      </div>
+
+      <br>
+
+      <!-- # element add remove -->
+      <div id="elementDiv" class="card">
+        <h4 class="card-header">要素の追加・削除</h4>
+        <div id="elementTargetDiv" class="card-block">
+          <button class="btn btn-info" onclick="addElement()">要素追加</button>
+          <button class="btn btn-info" onclick="removeElement()">要素削除</button>
+          <br>
         </div>
       </div>
     </div>
 
     <!-- portfolio javascript -->
     <script type="text/javascript" src="./2/loading.js"></script>
+    <script type="text/javascript" src="./2/element.js"></script>
     <!-- onload setting -->
     <script type="text/javascript">
       // JS2 onload
       function js2_onload() {
         // loading image window.
         loadingWindow = null;
+        // element add remove index
+        elementIndex = 0;
       }
     </script>
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
