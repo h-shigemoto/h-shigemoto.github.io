@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>KOYUPI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+  </head>
+  <body style="background-color:#F0FFFF" onload="js2_onload()">
+    <nav class="navbar navbar-dark bg-inverse">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="../../../index.html">KOYUPI</a>
+
+      <!-- Links -->
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#aboutme">Abount Me</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#skill">Skill</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#portfolio">Portfolio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container" style="margin: 2rem">
+      <a href="../menu.html">メニューに戻る</a>
+      <br><br>
+
+      <!-- dighasher -->
+      <div id="dighasherDiv" class="card">
+        <h4 class="card-header">dighasher</h4>
+        <div class="card-block">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-info"><a href="https://github.com/koyupi/dighasher">Githubのページはこちら</a></li>
+            <li class="list-group-item list-group-item-info"><a href="https://rubygems.org/gems/dighasher">RubyGemsのページはこちら</a></li>
+          </ul>
+          <br>
+          指定された文字列からハッシュを生成します。<br>
+          実務的にはちょっと使えないかもしれませんが（後述するbase_strの関係で）、「ハッシュってこうゆうものなんだ」を覚えるには調度いい感じだと思います。<br>
+          対応しているハッシュアルゴリズム（Digestライブラリを利用しています）は、下記になります。<br>
+          <ul>
+            <li>MD5</li>
+            <li>SHA1</li>
+            <li>SHA256</li>
+            <li>SHA512</li>
+            <li>SHA2</li>
+          </ul>
+          このうち、SHA256とSHA512は、SHA2に入ります（生成の方法が左記については2通りあります）。<br>
+          また、SHA384もSHA2を指定することで利用可能です。<br>
+          <br>
+
+          gemのインストールは下記のコマンドを実行します。<br>
+          <br>
+          <pre style="background:black;color:white;">
+            <code>
+              $ gem install dighasher</code>
+          </pre>
+
+          利用方法ですが、インスタンス生成時に指定するパラメータがそれぞれ異なるだけで、その後は基本的に同じです。<br>
+          下記にコードを交えて利用方法を説明していきます。<br>
+          まずは、インスタンス生成から、ハッシュアルゴリズム切り替え、文字列確認です。<br>
+          <br>
+          <pre style="background:black;color:white;">
+            <code>
+              require 'dighasher'
+
+              # まずそれぞれの方式のインスタンス生成です。
+
+              # MD5方式のハッシュ生成器インスタンスを生成します。
+              # ハッシュ生成対象文字列は、第二引数の「生成文字列」です。
+              gene = Dighasher::Generator.new(Dighasher::DigestGenerator::MD5, "生成文字列")
+              # SHA1方式のハッシュ生成器インスタンスを生成します。
+              gene = Dighasher::Generator.new(Dighasher::DigestGenerator::SHA1, "生成文字列")
+              # SHA256方式のハッシュ生成器インスタンスを生成します。
+              gene = Dighasher::Generator.new(Dighasher::DigestGenerator::SHA256, "生成文字列")
+              # SHA512方式のハッシュ生成器インスタンスを生成します。
+              gene = Dighasher::Generator.new(Dighasher::DigestGenerator::SHA512, "生成文字列")
+              # SHA2方式のハッシュ生成器インスタンスを生成します。
+              # 第三引数に、対象のビット長を指定します（今回は384を指定しています。他にも256、512が指定可能です）。
+              gene = Dighasher::Generator.new(Dighasher::DigestGenerator::SHA2, "生成文字列", 384)
+
+
+              # 現在のハッシュアルゴリズムを別のものに切り替えます（対象の文字列はそのままです）。
+
+              # MD5に切り替えます。
+              gene.change_mode(Dighasher::DigestGenerator::MD5)
+              # SHA2（ビット長256）に切り替えます。
+              gene.change_mode(Dighasher::DigestGenerator::SHA2, 256)
+
+
+              # ハッシュ生成対象の文字列を更新（追記）します。
+              gene.update("更新文字列")
+
+
+              # ハッシュ生成対象の文字列を確認します。
+              target_str = gene.base_str
+            </code>
+          </pre>
+
+          ハッシュ生成対象文字列を内部的に保持しているので、忘れかけた時にはbase_strでいつでも確認できます。<br>
+          また、SHA256、SHA512については、それぞれ指定してインスタンスを生成する方法と、SHA2とビット長を指定して生成する方法があります。<br>
+          <br>
+          では、続いて、実際のハッシュ生成と比較です。<br>
+          <br>
+          <pre style="background:black;color:white;">
+            <code>
+              # ハッシュを生成します。
+              # デフォルトで、16進数表記にして返却します。
+
+              # 16進数表記を利用しないハッシュを生成します。
+              # 第一引数にfalseを設定した場合、返却値が16進数ではなくなります。
+              hash = gene.generate_hash(false)
+              # 16進数表記のハッシュを生成します。
+              hash = gene.generate_hash
+              # 16進数表記、一時的に文字列を追記したハッシュを生成します。
+              # 第二引数に、一時的に追記する文字列を設定します。
+              # ハッシュ生成後の対象文字列には、「追記文字列」の部分は含まれません。あくまで今回の生成時のみ追記されます。
+              hash = gene.generate_hash(true, "追記文字列")
+
+              # ハッシュ生成後、ハッシュ生成器の中身をリセットする方法です。
+
+              # 16進数表記を利用しないハッシュを生成します。
+              # 第一引数にfalseを設定した場合、返却値が16進数ではなくなります。
+              hash = gene.generate_hash!(false)
+              # 16進数表記のハッシュを生成します。
+              hash = gene.generate_hash!
+
+
+              # ファイルからハッシュを生成します。
+              # 文字列として返却します。
+              hash = gene.file_hash('対象ファイルパス')
+
+
+              # ハッシュ同士を比較します。
+
+              # 単純にハッシュを比較します。
+              result = gene.equals("比較したい文字列")
+              # 一時的に文字列を追記してハッシュを比較します。
+              # 第二引数に、一時的に追記する文字列を設定します。
+              # ハッシュ比較の対象文字列には、「追記文字列」の部分は含まれません。あくまで今回の比較時のみ追記されます。
+              result = gene.equals("比較したい文字列", "追記文字列")
+
+
+              # 内容をリセットします。
+              gene.reset
+            </code>
+          </pre>
+          他にも、現状のアルゴリズム（mode）、ビット長（bitlen）を利用すれば、現状何を使っているかは確認できるようにしています。<br>
+          元々のDigestライブラリとメソッド名は多少違いますが、使い方はほぼほぼ同じですので、よかったら使ってみてください。
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+  </body>
+</html>

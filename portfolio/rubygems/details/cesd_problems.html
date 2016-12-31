@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>KOYUPI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+  </head>
+  <body style="background-color:#F0FFFF" onload="js2_onload()">
+    <nav class="navbar navbar-dark bg-inverse">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="../../../index.html">KOYUPI</a>
+
+      <!-- Links -->
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#aboutme">Abount Me</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#skill">Skill</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#portfolio">Portfolio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container" style="margin: 2rem">
+      <a href="../menu.html">メニューに戻る</a>
+      <br><br>
+
+      <!-- cesd_problems -->
+      <div id="cesdProblemsDiv" class="card">
+        <h4 class="card-header">cesd_problems</h4>
+        <div class="card-block">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-info"><a href="https://github.com/koyupi/cesd_problems">Githubのページはこちら</a></li>
+            <li class="list-group-item list-group-item-info"><a href="https://rubygems.org/gems/cesd_problems">RubyGemsのページはこちら</a></li>
+          </ul>
+          <br>
+          CES-D（うつ病自己評価評価尺度）の問題、解答及び点数配点をセット（ハッシュ）で定義したものです。<br>
+          準備した言語は、下記の2つになります。<br>
+          <ul>
+            <li>日本語</li>
+            <li>英語</li>
+          </ul>
+          <br>
+
+          gemのインストールは下記のコマンドを実行します。<br>
+          <br>
+          <pre style="background:black;color:white;">
+            <code>
+              $ gem install cesd_problems</code>
+          </pre>
+
+          取得方法は複数あり、問題文と点数配点のみ、解答のみといった取得も可能になります。<br>
+          勿論、質問、解答及び点数配点を一度に取得することもできます。<br>
+          実際に下記、コードを交えて説明します。<br>
+          <br>
+          <pre style="background:black;color:white;">
+            <code>
+            require 'cesd_problems'
+
+            # まずは、日本語で取得します。
+
+            # 日本語の問題、点数配点等全てを取得する。
+            all = CesdProblems.get_ja_problems
+
+            # ここからは、個別に取得していきます。
+            # 日本語の問題と、それぞれの配点のみ取得する。
+            problems = CesdProblems.get_ja_problems(CesdProblems::PROBLEMS)
+            # 日本語の解答（4択）のみ取得する。
+            answers = CesdProblems.get_ja_problems(CesdProblems::ANSWERS)
+            # 判定基準点数のみ取得する。
+            criteria = CesdProblems.get_ja_problems(CesdProblems::CRITERIA)
+
+
+            # 上記と同様に、英語でも取得していきます。
+
+            # 英語の問題、点数配点等全てを取得する。
+            all = CesdProblems.get_en_problems
+            # 英語の問題と、それぞれの配点のみ取得する。
+            problems = CesdProblems.get_en_problems(CesdProblems::PROBLEMS)
+            # 英語の解答（4択）のみ取得する。
+            answers = CesdProblems.get_en_problems(CesdProblems::ANSWERS)
+            # 判定基準点数のみ取得する。
+            criteria = CesdProblems.get_en_problems(CesdProblems::CRITERIA)
+
+
+            # 日本語と英語、一度に全て取得してみます。
+            all = CesdProblems.get_all_lang
+            # 日本語と英語の問題と、それぞれの配点のみ取得する。
+            problems = CesdProblems.get_all_lang(CesdProblems::PROBLEMS)
+            # 日本語と英語の解答（4択）のみ取得する。
+            answers = CesdProblems.get_all_lang(CesdProblems::ANSWERS)
+            # 判定基準点数のみ取得する。
+            criteria = CesdProblems.get_all_lang(CesdProblems::CRITERIA)
+            </code>
+          </pre>
+          <br>
+          取得結果は、基本的にハッシュで返却しています。<br>
+          どう返却しているかは、<a href="https://github.com/koyupi/cesd_problems/blob/master/lib/cesd_problems.rb">こちら</a>をご確認ください（出力したほうが早いかもしれないので、pとかppとかで確認でもいいと思います）。<br>
+          <br>
+          4択の解答と、各問題文に対する配点は、基本的にラジオボタンが多いと思って、左から順に設定しています（それぞれ配列で定義しています）。<br>
+          1番目の選択肢が1番目の配点と対応、2番目の選択肢が2番目の配点と対応、といった感じです。<br>
+          そこらへんの兼ね合いもあって、問題と配点をセットで返却したりもしています。<br>
+          <br>
+          実際に内部的にロジックはほとんどなく、配列で定義したCES-Dの内容を返却しているだけです。<br>
+          なので、GitHubを読めばすぐわかるレベルだと思います。<br>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+  </body>
+</html>
