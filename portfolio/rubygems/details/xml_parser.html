@@ -94,9 +94,49 @@
               require 'xml_parser'
 
               # 文字列からインスタンスを生成します。
+              parser = XmlParser::Document.new("XML文字列")
+              # XMLファイルからインスタンスを生成します。
+              parser = XmlParser::Document.from_file("XMLファイルパス")
+              # YAMLファイルからインスタンスを生成します。
+              # YAMLファイルは、ハッシュ形式のみ対応しています。
+              parser = XmlParser::Document.from_yml_file("YAMLファイルパス")
+              # YAML文字列からインスタンスを生成します。
+              # こちらもハッシュ形式のみ対応しています。
+              parser = XmlParser::Document.from_yml("YAML文字列")
+              # ハッシュからインスタンスを生成します。
+              parser = XmlParser::Document.from_hash({a: "valueA", b: "valueB"})
+
+              # XPathに一致したものに対して、後続処理をブロックで渡せます。
+              # ブロックを渡さない場合、XPathに一致したものを返却します。
+              values = parser.xpath_map("/sample/elt/@name") { |elm|
+                elm.value + " map"
+              }
+
+              # XPathに一致したものに対して、後続処理をブロックで渡せます。
+              # こちらはmapではなく、内部でeachで処理しています。
+              # ブロックを渡さない場合、内容をppで表示しています。
+              value = nil
+              parser.xpath_each("/sample/elt/@name") { |elm|
+                value = elm.value
+              }
+
+              # XPathに一致したものを文字列にして返却します。
+              str = parser.xpath_to_s("/sample/elt")
             </code>
           </pre>
+
+          ハッシュからXML文字列を生成する場合、作成されるXMLのルート要素名及び、<br>
+          属性名（keyに対応するvalueが設定されます）を指定できます。<br>
+          基本的に、1つのキー（要素）に対して、1つの値（属性）が設定されます。<br>
+          1つのキー（要素）に対して、複数の値（属性）は設定できません。<br>
           <br>
+          ルート要素名は下記メソッドの第二引数、属性名は第三引数に指定できます。<br>
+          <ul>
+            <li>from_yml</li>
+            <li>from_yml_file</li>
+            <li>from_hash</li>
+          </ul>
+          形式が気になる方は、Githubで<a href="https://github.com/koyupi/xml_parser/blob/master/spec/document_spec.rb">RSpec</a>を参照してみてください。<br>
         </div>
       </div>
     </div>
