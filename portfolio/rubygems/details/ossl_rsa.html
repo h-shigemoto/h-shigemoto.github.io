@@ -5,7 +5,7 @@
     <title>KOYUPI</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
   </head>
-  <body style="background-color:#F0FFFF" onload="js2_onload()">
+  <body style="background-color:#F0FFFF">
     <nav class="navbar navbar-dark bg-inverse">
 
       <!-- Brand -->
@@ -51,14 +51,90 @@
           </pre>
 
           では、実際に下記で利用方法を説明します。<br>
+          まずはインスタンス生成からです。<br>
           <br>
           <pre style="background:black;color:white;">
             <code>
               require 'ossl_rsa'
 
-              # 
+              # インスタンスを生成します（キー長指定）。
+              rsa = OsslRsa::Rsa.new({size: 2048})
+              # インスタンスを生成します（キー、パスワードを指定）。
+              rsa = OsslRsa::Rsa.new({obj: pem_private, pass: "ossl_rsa"})
             </code>
           </pre>
+          キー、パスワードを指定する場合、上例ではprivateキーを指定していますが、publicキーも指定できます。<br>
+          また、pemではなく、derでも生成可能です。<br>
+          <br>
+          では、次に下記実際に利用していきます。<br>
+          <br>
+          <pre style="background:black;color:white;">
+            <code>
+              # private、publicのキーをハッシュで取得します。
+              # 返却されるハッシュのキーは、「private」、「public」です。
+
+              # PEMでprivate、publicのキーをハッシュで取得します。
+              key_pair = rsa.key_pair(OsslRsa::PEM)
+              # DERでprivate、publicのキーをハッシュで取得します。
+              key_pair = rsa.key_pair(OsslRsa::DER)
+
+              # private、publicのキーをテキストで取得します。
+              # 返却されるハッシュのキーは、key_pairの場合と同様です。
+              text_pair = rsa.text_pair
+
+
+              # RSAで暗号化します（Base64エンコードあり）。
+              value = rsa.encrypt("暗号化対象文字列")
+              # RSAで暗号化します（Base64エンコードなし。Base64エンコード指定は第三引数なので、第二引数のパディング方式も指定）。
+              value = rsa.encrypt("暗号化対象文字列", パディング方式, false)
+
+              # RSAで復号します（Base64エンコードあり）。
+              value = rsa.decrypt("復号対象文字列")
+              # RSAで復号します（Base64エンコードなし。Base64エンコード指定は第三引数なので、第二引数のパディング方式も指定）。
+              value = rsa.decrypt("復号対象文字列", パディング方式, false)
+
+
+              # SHA256を利用して署名します（Base64エンコードあり）。
+              value = rsa.sign("sha256", "署名対象文字列")
+              # SHA256を利用して署名します（Base64エンコードなし）。
+              value = rsa.sign("sha256", "署名対象文字列", false)
+
+              # MD5を利用して署名検証します（Base64エンコードあり）。
+              result = rsa.verify("md5", "検証対象文字列", "比較対象文字列")
+              # MD5を利用して署名検証します（Base64エンコードなし）。
+              result = rsa.verify("md5", "検証対象文字列", "比較対象文字列", false)
+
+              # Base64の方式を設定します。
+              rsa.set_rfc(OsslRsa::RFC2045)
+              rsa.set_rfc(OsslRsa::RFC4648)
+            </code>
+          </pre>
+          key_pairについては、第二引数で暗号化方式、第三引数にパスワードを指定することもできます。<br>
+          また、暗号化についてはpublic&nbsp;key、復号についてはprivate&nbsp;keyを利用しています。<br>
+          <br>
+          最後に、結果をファイル保存する場合です。<br>
+          <br>
+          <pre style="background:black;color:white;">
+            <code>
+              # 1つのファイルにprivate、public keyをDERで保存します。
+              rsa.to_one_file("保存ファイルパス", OsslRsa::DER)
+              # 1つのファイルにprivate、public keyをPEMで保存します。
+              rsa.to_one_file("保存ファイルパス", OsslRsa::PEM)
+
+              # privat key、public keyをDERで別ファイルに保存します。
+              # 保存したファイルパスが返却されます（ハッシュ形式です）。
+              file_path_pair = rsa.to_file("保存ディレクトリパス", OsslRsa::DER)
+              # privat key、public keyをPEMで別ファイルに保存します。
+              file_path_pair = rsa.to_file("保存ディレクトリパス", OsslRsa::PEM)
+
+              # 特定のファイルにprivate key、public keyをDERで保存します。
+              # ファイルパスは、それぞれハッシュ形式で指定します。
+              file_path_pair = rsa.to_specify_file({ private: 'private key保存ファイルパス', public: 'public key保存ファイルパス' }, OsslRsa::DER)
+              # 特定のファイルにprivate key、public keyをPEMで保存します。
+              file_path_pair = rsa.to_specify_file({ private: 'private key保存ファイルパス', public: 'public key保存ファイルパス' }, OsslRsa::PEM)
+            </code>
+          </pre>
+          上記のように利用できます。<br>
           <br>
         </div>
       </div>

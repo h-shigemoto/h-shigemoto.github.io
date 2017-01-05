@@ -5,7 +5,7 @@
     <title>KOYUPI</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
   </head>
-  <body style="background-color:#F0FFFF" onload="js2_onload()">
+  <body style="background-color:#F0FFFF">
     <nav class="navbar navbar-dark bg-inverse">
 
       <!-- Brand -->
@@ -85,32 +85,32 @@
           <br>
           <pre style="background:black;color:white;">
             <code>
-            # 暗号化します（Base64エンコード）。
-            value = cryptor.encrypt("暗号化対象文字列")
-            # 暗号化します（Base64エンコードなし）。
-            value = cryptor.encrypt("暗号化対象文字列", false)
+              # 暗号化します（Base64エンコード）。
+              value = cryptor.encrypt("暗号化対象文字列")
+              # 暗号化します（Base64エンコードなし）。
+              value = cryptor.encrypt("暗号化対象文字列", false)
 
-            # 復号します（Base64エンコード）。
-            value = cryptor.decrypt("復号対象文字列")
-            # 復号します（Base64エンコードなし）。
-            value = cryptor.decrypt("復号対象文字列", false)
+              # 復号します（Base64エンコード）。
+              value = cryptor.decrypt("復号対象文字列")
+              # 復号します（Base64エンコードなし）。
+              value = cryptor.decrypt("復号対象文字列", false)
 
-            # 暗号化結果をファイルに出力します（Base64エンコード）。
-            value = cryptor.encrypt_to_file("出力ファイルパス", "暗号化対象文字列")
-            # 暗号化結果をファイルに出力します（Base64エンコードなし）。
-            value = cryptor.encrypt_to_file("出力ファイルパス", "暗号化対象文字列", false)
-            # 復号をファイルから行います（Base64エンコード）。
-            value = cryptor.decrypt_from_file("読み込みファイルパス")
-            # 復号をファイルから行います（Base64エンコードなし）。
-            value = cryptor.decrypt_from_file("読み込みファイルパス", false)
+              # 暗号化結果をファイルに出力します（Base64エンコード）。
+              value = cryptor.encrypt_to_file("出力ファイルパス", "暗号化対象文字列")
+              # 暗号化結果をファイルに出力します（Base64エンコードなし）。
+              value = cryptor.encrypt_to_file("出力ファイルパス", "暗号化対象文字列", false)
+              # 復号をファイルから行います（Base64エンコード）。
+              value = cryptor.decrypt_from_file("読み込みファイルパス")
+              # 復号をファイルから行います（Base64エンコードなし）。
+              value = cryptor.decrypt_from_file("読み込みファイルパス", false)
 
 
-            # Base64の方式を設定します。
-            cryptor.set_rfc(OsslCryptor::RFC2045)
-            cryptor.set_rfc(OsslCryptor::RFC4648)
+              # Base64の方式を設定します。
+              cryptor.set_rfc(OsslCryptor::RFC2045)
+              cryptor.set_rfc(OsslCryptor::RFC4648)
 
-            # 内容をリセットします。
-            cryptor.reset
+              # 内容をリセットします。
+              cryptor.reset
             </code>
           </pre>
           この他、設定しているキーとIVのペア（key_iv）等も確認できます。<br>
