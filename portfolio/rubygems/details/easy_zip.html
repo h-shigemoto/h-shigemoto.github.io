@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>KOYUPI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
+  </head>
+  <body style="background-color:#F0FFFF">
+    <nav class="navbar navbar-dark bg-inverse">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="../../../index.html">KOYUPI</a>
+
+      <!-- Links -->
+      <ul class="nav navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#aboutme">Abount Me</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#skill">Skill</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#portfolio">Portfolio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../../../index.html#contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container" style="margin: 2rem">
+      <a href="../menu.html">メニューに戻る</a>
+      <br><br>
+
+      <!-- easy_zip -->
+      <div id="easyZipDiv" class="card">
+        <h4 class="card-header">easy_zip</h4>
+        <div class="card-block">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-info"><a href="https://github.com/koyupi/easy_zip">Githubのページはこちら</a></li>
+            <li class="list-group-item list-group-item-info"><a href="https://rubygems.org/gems/easy_zip">RubyGemsのページはこちら</a></li>
+          </ul>
+          <br>
+          対象ファイルに文字列を書き込み、GZipに圧縮します。<br>
+          また、GZipファイルから文字列を読み込みます。<br>
+          # 今後普通のファイルをGZipにしたりする処理も入れていく予定です。<br>
+          <br>
+
+          gemのインストールは下記のコマンドを実行します。<br>
+          <br>
+          <pre style="background:black;color:white;">
+            <code>
+              $  gem install easy_zip</code>
+          </pre>
+
+          では使い方です。<br>
+          すごく簡単です。。。。<br>
+          <br>
+          <pre style="background:black;color:white;">
+            <code>
+              # GZipファイルの全行を読み込みます。
+              lines = EasyZip::Gzip.read_lines('読み込みGZipファイルパス')
+              # GZipファイルにすべての内容を書き込みます。
+              EasyZip::Gzip.write_lines('書き込みGZipファイルパス', ['1行目', '2行目', '3行目'])
+            </code>
+          </pre>
+          上記のように、簡単にテキストをGZipファイルに書き込むことができます。<br>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+  </body>
+</html>
