@@ -60,6 +60,8 @@
             <code>
               # GZipファイルの全行を読み込みます。
               lines = EasyZip::Gzip.read_lines('読み込みGZipファイルパス')
+              # GZipファイルに単一の内容を書き込みます。
+              EasyZip::Gzip.write_lines('書き込みGZipファイルパス', '書き込む内容')
               # GZipファイルにすべての内容を書き込みます。
               EasyZip::Gzip.write_lines('書き込みGZipファイルパス', ['1行目', '2行目', '3行目'])
             </code>
